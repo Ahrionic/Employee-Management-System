@@ -1,7 +1,7 @@
 const mysql = require('mysql2')
 const inquirer = require('inquirer')
 
-const db = mysql.createConnection('mysql://root:Bunbun21*@localhost/employeeManager_db')
+const db = mysql.createConnection('mysql://root:Bunbun21*@localhost:3306/employeeManager_db')
 
 // switch case to set up adding and viewing or employees
 const homePage = () => {
