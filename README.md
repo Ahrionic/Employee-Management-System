@@ -19,10 +19,10 @@
   Inquirer, MySql
   ***
   ## Visual Presentation
-  ![VisualPresentation](images/employee management.jpg)
+  ![VisualPresentation](images/employee_management.jpg)
   ***
   ## Installation
-  Downloan the repo from my github and run the program using node index.js
+  Download the repo from my github and run the program using node index.js
   ***
   ## Usage
   To manage roles and departments in the company
