@@ -3,7 +3,7 @@ const inquirer = require('inquirer')
 
 const db = mysql.createConnection('mysql://root:300Monkeysonfire!!!@localhost/employeeManager_db')
 
-// Need Type, name, message. Prompt for event
+// switch case to set up adding and viewing or employees
 const homePage = () => {
   inquirer.prompt([{
     type: 'list',
@@ -52,7 +52,7 @@ const homePage = () => {
     })
 }
 
-// Adds a department to the db
+// Adding department to the database
 const addDepartment = () => {
   inquirer.prompt([{
     type: 'input',
@@ -68,7 +68,7 @@ const addDepartment = () => {
     })
 }
 
-// Adds a role to the db
+// Adding a role to the database
 const addRole = () => {
   inquirer.prompt([{
     type: 'input',
@@ -94,7 +94,7 @@ const addRole = () => {
     })
 }
 
-//adds an employee to the db
+//adding employees to the database, checking if they are a manager
 const addEmployee = () => {
   inquirer.prompt([{
     type: 'input',
@@ -150,41 +150,44 @@ const addEmployee = () => {
     })
 }
 
+//views the department database
 const viewDepartments = () => {
   db.query('SELECT * FROM departments', (err, departments) => {
     console.log('\n')
     console.table(departments)
   })
-  homeScreen()
+  homePage()
 }
 
+//Views employees roles 
 const viewRoles = () => {
   db.query('SELECT * FROM roles', (err, roles) => {
     console.log('\n')
     console.table(roles)
   })
-  homeScreen()
+  homePage()
 }
 
+//Views employees 
 const viewEmployees = () => {
   db.query('SELECT * FROM employees', (err, employees) => {
     console.log('\n')
     console.table(employees)
   })
-  homeScreen()
+  homePage()
 }
 
-// Updates employee's role
+// Updates employees role
 const Update = () => {
   inquirer.prompt([{
     type: 'input',
     name: 'id',
-    message: 'Enter the id of the employee:'
+    message: 'Enter the ID of the employee:'
   },
   {
     type: 'input',
     name: 'role_id',
-    message: 'Enter the employee\'s new role:'
+    message: 'Enter employee\'s new role:'
   }])
   .then(roleChange => {
     let role = { role_id: roleChange.role_id }
@@ -192,14 +195,14 @@ const Update = () => {
     db.query(`UPDATE employees SET ? WHERE id = ${roleChange.id}`, roleChange, err => {
       if (err) { console.log(err) }
     })
-    console.log('Role updated, returning to home screen...')
-    homeScreen()
+    console.log('Role updated')
+    homePage()
   })
 }
 
 const quit = () => {
-  console.log('Goodbye')
+  console.log('Bye!')
   process.exit(1)
 }
 
-homeScreen()
+homePage()
